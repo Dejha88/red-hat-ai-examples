@@ -13,7 +13,7 @@
 
 ## Fine tuning the model
 
-Ihe notebook in this module demonstrates how to fine-tune or instruction-tune a student model by using the mixed datasets produced in Module 3. The following diagram illustrates the model training workflow.
+Ihe notebook in this module demonstrates how to fine-tune a student model by using the mixed datasets produced in Module 4. The following diagram illustrates the model training workflow.
 
 ![Model Training Flow Diagram](../../../assets/usecase/knowledge-tuning/Model%20Training.png)
 
@@ -22,13 +22,10 @@ Ihe notebook in this module demonstrates how to fine-tune or instruction-tune a 
 
 - You completed the steps in [Module 4: Knowledge Mixing](../04_Knowledge_Mixing/04_Knowledge_Mixing_README.md).
 
-- Your workbench is GPU-enabled for training as described in [Setup](../00_Setup/00_Setup_README.md) for details.
+- Your workbench is GPU-enabled for training, as described in [Setup](../00_Setup/00_Setup_README.md).
 
-- Verify that the [.env.example](./.env.example) file sets the following environment variable:
+- The [.env.example](./.env.example) file sets the `STUDENT_MODEL` environment variable.
 
-#### Environment variables
-
-- `STUDENT_MODEL` — The model that you want to train.
 
 ### Procedure
 
@@ -42,7 +39,7 @@ The notebook generates the following artifacts:
 
 ## Debug & tips
 
-- Monitor GPU memory, if needed, for example, if takes the model longer than expected to return a result. You can use the NVIDIA System Management Interface (nvidia-smi) command-line utility to monitor the GPU utilization to determine whether the model is using GPU memory.
+- Monitor GPU memory if, for example, the model takes longer than expected to return a result. You can use the NVIDIA System Management Interface (nvidia-smi) command-line utility to monitor the GPU utilization to determine whether the model is using GPU memory.
 
 
 ## Next step

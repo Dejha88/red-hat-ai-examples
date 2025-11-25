@@ -14,7 +14,7 @@
 
 ## Evaluate the base model
 
-Before you train a base model, evaluate it's preliminary performance. Later, after you train the model with your data, you can objectively compare how effective the knowledge tuning tasks are for customizing the model.
+In the Teacher-Student model paradigm, the student model is also known as the base model. Before you train a base model, evaluate it's preliminary performance. Later, after you train the model with your data, you can objectively compare how effective the knowledge tuning tasks are for customizing the model.
 
 ### Prerequisites
 

@@ -10,7 +10,7 @@ By following the steps in this example, you learn how to inject domain-specific 
 In this example workflow, you complete the following modules sequentially in your workbench environment, as illustrated in Figure 1 and Figure 2:
 
 1. Base Model Evaluation - Run the base model before you train, to evaluate its preliminary performance.
-2. Data Preprocessing — Convert a URL page to structured Markdown format by using Docling. Chunk text and produce a small seed dataset.
+2. Data Processing — Convert a URL page to structured Markdown format by using Docling. Chunk text and produce a small seed dataset.
 3. Knowledge Generation — Expand the seed dataset and generate more question and answer (Q&A) pairs by using an LLM teacher model.
 4. Knowledge Mixing — Combine generated Q&A pairs and summaries into training mixes.
 5. Model Training — Fine-tune a model by using the training mixes.

@@ -19,11 +19,7 @@ In this module, the notebook evaluates trained models and generated datasets aga
 
 - You completed the steps in [Module 5: Model Training](../05_Model_Training/05_Model_Training_README.md).
 
-- Verify that the [.env.example](./.env.example) file sets the following environment variable:
-
-#### Environment variables
-
-- `STUDENT_MODEL_NAME` — The name of the trained model
+- The [.env.example](./.env.example) file sets the `STUDENT_MODEL_NAME` environment variable to the name of the trained model.
 
 ### Procedure
 

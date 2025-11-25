@@ -14,9 +14,9 @@
 
 ## Knowledge generation and expanding seed dataset into Q&A
 
-This module expands the curated seed examples produced in the previous step into a larger set of Q&A pairs by using a Large Language Model (LLM) teacher model and local utilities. 
+In this module, you expand the curated seed examples into a larger set of Q&A pairs by using a teacher model and local utilities. 
 
-![Knowledge Generation Flow Diagram](../../../assets/usecase/knowledge-tuning/Knowledge%20Genertaion.png)
+![Knowledge Generation Flow Diagram](../../../assets/usecase/knowledge-tuning/Knowledge%20Generation.png)
 
 ### Prerequisites
 
@@ -35,7 +35,7 @@ This module expands the curated seed examples produced in the previous step into
 
 The notebook generates the following artifact:
 
-- `output/step_03/**/gen.jsonl` — This file contains the raw generation output for
+- `output/step_03/**/gen.jsonl` — This file contains the raw generation output for this data:
   - Extractive summary
   - Detailed summary
   - Key facts Q&A

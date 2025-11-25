@@ -13,8 +13,7 @@
 
 ## Knowledge mixing and preparing training mixes
 
-This module mixes generated Q&A, extractive/detailed summaries, and other artifacts into training-ready datasets.
-It prepares different cut sizes and mixes (upsampling, downsampling) that are consumed by model training workflows.
+This module mixes generated Q&A, extractive/detailed summaries, and other artifacts into training-ready datasets. It prepares different cut sizes and mixes (upsampling, downsampling) that are consumed by model training workflows.
 
 ![Knowledge Mixing Flow Diagram](../../../assets/usecase/knowledge-tuning/Knowledge%20Mixing.png)
 
@@ -22,11 +21,9 @@ It prepares different cut sizes and mixes (upsampling, downsampling) that are co
 
 - You completed the steps in [Module 3: Knowledge Generation](../03_Knowledge_Generation/03_Knowledge_Generation_README.md).
 
-- Verify the following folders that the notebook in this module requires as input:
+- The `output/step_03/*` folder contains the summary folders generated from the module 3 notebook.
 
- - `output/step_03/*` — Summary folders generated from the module 3 notebook.
-
-- Verify that the following environment variables are set in the [.env.example](./.env.example) file:
+- The following environment variables are set in the [.env.example](./.env.example) file:
 
   - `TOKENIZER_MODEL` — A valid tokenizer model for counting tokens. The tokenizer must be compatible with `transformers`.
   - `SAVE_GPT_OSS_FORMAT` — A Boolean value that specifies whether to save the output in GPT-OSS format. The default (e.g. `false`)
