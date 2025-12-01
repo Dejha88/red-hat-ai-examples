@@ -46,5 +46,3 @@ pull_request_rules:
       label:
         remove:
           - needs-rebase
-
-
