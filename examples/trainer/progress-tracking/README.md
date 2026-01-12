@@ -5,6 +5,7 @@ This example demonstrates how to use real-time progress tracking in Kubeflow Tra
 ## Overview
 
 Progress tracking provides visibility into your training jobs, including:
+
 - Current step and epoch
 - Training loss and metrics
 - Estimated time remaining
@@ -68,6 +69,7 @@ oc get trainjob <job-name> -w
 ## How It Works
 
 RHAI trainers automatically instrument your training code to:
+
 1. Intercept HuggingFace Trainer callbacks
 2. Report metrics to a sidecar metrics server
 3. Write progress to TrainJob annotations
