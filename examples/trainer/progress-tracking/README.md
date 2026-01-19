@@ -9,7 +9,7 @@ In this example, we fine-tune the **Qwen 2.5 1.5B Instruct** model on the **Stan
 ### Key Features
 
 | Feature | Description |
-|---------|-------------|
+| --- | --- |
 | **Automatic Progress Tracking** | TransformersTrainer auto-injects a `KubeflowProgressCallback` that exposes training metrics via HTTP |
 | **Real-Time Metrics** | View current step, epoch, loss, and estimated time remaining in the OpenShift AI Dashboard |
 | **PVC-Based Checkpointing** | Save model checkpoints to a shared PersistentVolumeClaim for durability and resume capability |
@@ -59,6 +59,7 @@ In this example, we fine-tune the **Qwen 2.5 1.5B Instruct** model on the **Stan
 ![](./images/05.png)
 
 * From the workbench, clone this repository:
+
   ```bash
   git clone https://github.com/red-hat-data-services/red-hat-ai-examples.git
   ```
@@ -70,7 +71,7 @@ In this example, we fine-tune the **Qwen 2.5 1.5B Instruct** model on the **Stan
 Before running the notebook, ensure you have the following environment variables set:
 
 | Variable | Description |
-|----------|-------------|
+| --- | --- |
 | `OPENSHIFT_API_URL` | Your OpenShift API server URL (auto-set in workbench) |
 | `NOTEBOOK_USER_TOKEN` | Authentication token for API access (auto-set in workbench) |
 
@@ -85,7 +86,7 @@ When you use `TransformersTrainer` with `enable_progression_tracking=True` (the 
 ### Available Metrics
 
 | Metric | Description |
-|--------|-------------|
+| --- | --- |
 | `progressPercentage` | Overall completion percentage (0-100) |
 | `currentStep` / `totalSteps` | Training step progress |
 | `currentEpoch` / `totalEpochs` | Epoch progress |
@@ -98,20 +99,23 @@ When you use `TransformersTrainer` with `enable_progression_tracking=True` (the 
 ### Model: Qwen 2.5 1.5B Instruct
 
 A compact instruction-tuned language model from the Qwen family:
-- **Parameters:** 1.5 billion
-- **Context Length:** 32K tokens
-- **Languages:** Multilingual with strong English and Chinese support
-- **Use Case:** Ideal for instruction-following, chat, and text generation tasks
+
+* **Parameters:** 1.5 billion
+* **Context Length:** 32K tokens
+* **Languages:** Multilingual with strong English and Chinese support
+* **Use Case:** Ideal for instruction-following, chat, and text generation tasks
 
 ### Dataset: Stanford Alpaca
 
 A widely-used instruction-following dataset:
-- **Source:** Stanford University
-- **Size:** 52,000 instruction-response pairs (we use 500 samples for this demo)
-- **Format:** Instruction, optional input, and response
+
+* **Source:** Stanford University
+* **Size:** 52,000 instruction-response pairs (we use 500 samples for this demo)
+* **Format:** Instruction, optional input, and response
 
 Sample format:
-```
+
+```text
 ### Instruction:
 Give three tips for staying healthy.
 
@@ -132,6 +136,7 @@ This example has been validated with the following configuration:
   * 2x NVIDIA-A100-SXM4-80GB
 
 * **Training Configuration:**
+
   ```yaml
   num_train_epochs: 1
   per_device_train_batch_size: 2
@@ -142,6 +147,7 @@ This example has been validated with the following configuration:
   ```
 
 * **Job Configuration:**
+
   ```yaml
   num_nodes: 2
   resources_per_node:
@@ -157,7 +163,7 @@ This example has been validated with the following configuration:
 ## TransformersTrainer Quick Reference
 
 | Parameter | Description | Default |
-|-----------|-------------|---------|
+| --- | --- | --- |
 | `func` | Training function using `transformers.Trainer` | Required |
 | `num_nodes` | Number of distributed training nodes | Required |
 | `resources_per_node` | GPU, CPU, memory per node | Required |
@@ -167,14 +173,14 @@ This example has been validated with the following configuration:
 
 ## Next Steps
 
-- **Scale Up:** Increase `num_nodes` for larger models or datasets
-- **Use LoRA:** Add PEFT/LoRA for memory-efficient fine-tuning
-- **Try Other Models:** This pattern works with any HuggingFace model
-- **Enable JIT Checkpointing:** Use `enable_jit_checkpoint=True` for automatic checkpoint saving on preemption
+* **Scale Up:** Increase `num_nodes` for larger models or datasets
+* **Use LoRA:** Add PEFT/LoRA for memory-efficient fine-tuning
+* **Try Other Models:** This pattern works with any HuggingFace model
+* **Enable JIT Checkpointing:** Use `enable_jit_checkpoint=True` for automatic checkpoint saving on preemption
 
 ## Resources
 
-- [Kubeflow Trainer Documentation](https://www.kubeflow.org/docs/components/trainer/)
-- [HuggingFace Transformers](https://huggingface.co/docs/transformers/)
-- [Stanford Alpaca Dataset](https://huggingface.co/datasets/tatsu-lab/alpaca)
-- [Qwen 2.5 Model](https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct)
+* [Kubeflow Trainer Documentation](https://www.kubeflow.org/docs/components/trainer/)
+* [HuggingFace Transformers](https://huggingface.co/docs/transformers/)
+* [Stanford Alpaca Dataset](https://huggingface.co/datasets/tatsu-lab/alpaca)
+* [Qwen 2.5 Model](https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct)
