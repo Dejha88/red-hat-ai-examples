@@ -31,32 +31,32 @@ In this example, we fine-tune the **Qwen 2.5 1.5B Instruct** model on the **Stan
 ### Setup Workbench
 
 * Access the OpenShift AI dashboard, for example from the top navigation bar menu:
-![](./images/01.png)
+![](./images/entry_page.png)
 
 * Log in, then go to _Data Science Projects_ and create a project:
-![](./images/02.png)
+![](./images/project_page.png)
 
 * Once the project is created, click on _Create a workbench_:
-![](./images/03.png)
+![](./images/create_workbench.png)
 
 * Then create a workbench with the following settings:
-  * Select the `Jupyter | PyTorch | CUDA | Python 3.12` notebook image:
-    ![](./images/04a.png)
-  * Select the `Medium` container size and add an accelerator:
-    ![](./images/04b.png)
+  * Select a hardware profile for your workbench:
+    ![](./images/create_workbench_select_hardawre_profile.png)
+  * Choose the appropriate hardware profile based on your needs:
+    ![](./images/create_workbench_hardware_profile_options.png)
     > [!NOTE]
     > Adding an accelerator is only needed to test the fine-tuned model from within the workbench.
   * Create a storage that'll be shared between the workbench and the fine-tuning runs.
     Make sure it uses a storage class with RWX capability and name it `shared`:
-    ![](./images/04c.png)
-    ![](./images/04d.png)
+    ![](./images/create_storage.png)
+    ![](./images/create_storage_2.png)
+  * Configure the storage with ReadWriteMany (RWX) access mode:
+    ![](./images/create_RWX_storage.png)
     > [!NOTE]
     > The shared PVC will be mounted at `/opt/app-root/src/shared` in the workbench.
-  * Review the configuration and click "Create workbench":
-    ![](./images/04e.png)
 
 * From "Workbenches" page, click on _Open_ when the workbench you've just created becomes ready:
-![](./images/05.png)
+![](./images/start_workbench.png)
 
 * From the workbench, clone this repository:
 
@@ -93,6 +93,22 @@ When you use `TransformersTrainer` with `enable_progression_tracking=True` (the 
 | `estimatedRemainingSeconds` | Estimated time to completion |
 | `trainMetrics.loss` | Current training loss value |
 | `trainMetrics.learning_rate` | Current learning rate |
+
+### Viewing Progress in the Dashboard
+
+Once your training job is running, you can monitor its progress directly from the OpenShift AI Dashboard:
+
+1. Navigate to **Model training** in the left sidebar to see your running jobs:
+![](./images/training_progress.png)
+
+2. Click on a job to view detailed resource allocation and pod status:
+![](./images/trainjob_resources.png)
+
+3. You can **pause** (suspend) a running job to free up resources. When paused, JIT checkpointing will save the current state:
+![](./images/pause_job.png)
+
+> [!TIP]
+> The dashboard automatically refreshes progress metrics every 30 seconds (configurable via `metrics_poll_interval_seconds`).
 
 ## Model and Dataset
 
