@@ -27,21 +27,59 @@ Question: What is the average salary in the engineering department?
 SELECT AVG(salary) FROM employees WHERE department = 'engineering'
 ```
 
-## Hardware Requirements
+## Execution modes
 
-This notebook is designed to run on a single GPU:
-- **Minimum**: 16GB VRAM (with QLoRA 4-bit quantization)
-- **Recommended**: 24GB VRAM (for faster training with larger batch sizes)
-- Works on: A10, A100, L4, L40S, RTX 3090/4090, and similar GPUs
+LORA/QLORA can run directly in a workbench, where training occurs on a single pod. Alternatively, it supports distributed training across multiple nodes/pods using Kubeflow Trainer. Two notebooks are provided to demonstrate these approaches: `lora_sft-local.ipynb` for single-pod training and `lora_sft-distributed.ipynb` for distributed training. While workbench setup is similar for both, we highlight specific configuration differences below.
 
-### Storage Requirements
+
+## Hardware requirements to run the example notebook
+
+### Workbench Requirements (Local example)
+
+| Image Type | Use Case | GPU | CPU | Memory | Notes |
+|------------|----------|-----|-----|--------|-------|
+| CUDA PyTorch Python 3.12 | NVIDIA GPU training | 1× GPU | 4 cores | 32Gi | Recommended for faster training |
+
+> [!NOTE]
+>
+> - Local mode is recommended for smaller training jobs.
+> - For larger training jobs consider the distributed training approach.
+
+### Training Job Requirements (Distributed example)
+
+| Component | Configuration | GPU per node | Total GPU | GPU Type (per GPU) | CPU | Memory | Flash Attention |
+|-----------|--------------|---|---|------------|-----|--------|-----------------|
+| Training Pods | 2 nodes × 2 GPUs | 2 | 4 | NVIDIA L40/L40S or equivalent | 4 cores/pod | 32Gi/pod | Required |
+> [!NOTE]
+>
+> - This example was tested on 2 nodes x 2 GPUs provided by L40S however, it will work on smaller/larger configurations.
+> - Flash Attention is required for efficient training.
+> - CPU and Memory requirements scale with batch size and model size. Above suit the example as it is.
+> - Worker pods are configurable from the `client.create_job` call within the notebook.
+
+### Workbench Requirements (Distributed example)
+
+| Image Type | Use Case | GPU | CPU | Memory | Notes |
+|------------|----------|-----|-----|--------|-------|
+| Minimal CPU Python 3.12 | CPU-based evaluation | None | 6 cores | 24Gi | Slower evaluation |
+| Minimal CUDA Python 3.12 (Example Default) | NVIDIA GPU evaluation (Example Default) | 1× GPU | 2 cores | 8Gi | Recommended for faster testing |
+
+> [!NOTE]
+>
+> - Workbench GPU is optional but recommended for faster model evaluation
+> - Evaluation was performed on L40S GPU however, it will work on smaller/larger configurations.
+> - Workbench resources and accelerator are configurable in `Create Workbench` view on RHOAI Platform
+
+### Storage Requirements (Distributed example)
 
 | Purpose | Size | Access Mode | Storage Class | Notes |
 |---------|------|-------------|---------------|-------|
 | Shared Storage (PVC) total | 10Gi (Example Default) | RWX | Dynamic provisioner required | Shared between workbench and training pods |
 
+> [!NOTE]
+>
 > - Storage can be created in `Create Workbench` view on RHOAI Platform, however, dynamic RWX provisioner is required to be configured prior to creating shared file storage in RHOAI.
-
+> - Shared storage is not required for the local example as dataset, model download and training all happen on the same pod.
 ## Setup
 
 ### Setup Workbench
@@ -72,7 +110,3 @@ This notebook is designed to run on a single GPU:
 ![](./docs/06.png)
 - Navigate to the `examples/fine-tuning/osft` directory and open the `osft-example.ipynb` notebook
 
-> [!IMPORTANT]
->
-> - By default, the notebook requires 2xL40/L40S (2x48GB) but:
->   - The example goes through distributed training on two nodes with two GPUs but it can be changed
